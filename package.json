@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "hbs": "^4.2.0",
+    "moment": "^2.29.1",
+    "mongoose": "^6.1.3",
+    "nodemon": "^2.0.15",
+    "passport": "^0.5.2",
+    "socket.io": "^4.4.0"
+  },
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "name": "chat-project",
+  "description": "Realtime chat app with rooms",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evanina/chat-project.git"
+  },
+  "keywords": [
+    "chat",
+    "node.js",
+    "socket.js"
+  ],
+  "author": "Eva Degano",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/evanina/chat-project/issues"
+  },
+  "homepage": "https://github.com/evanina/chat-project#readme"
+}
