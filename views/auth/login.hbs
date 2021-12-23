@@ -1,0 +1,16 @@
+<h1>Log in</h1>
+<form method="POST" action="/auth/login">
+  <label>Email address:</label>
+  <input type="email" name="email" placeholder="john_doe@gmail.com" required>
+
+  <label>Password:</label>
+  <input type="password" name="password" placeholder="********" required>
+
+  <button type="submit">Log in</button>
+
+  <a href="">I forgot my password</a>
+
+  {{#if errorMessage}}
+  <div>{{errorMessage}}</div>
+  {{/if}}
+</form>

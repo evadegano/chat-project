@@ -1,30 +1,47 @@
 // require modules
 require("dotenv").config();
-const path = require("path");
 const http = require("http"); // need to access this directly to use Socket.io
 const express = require("express");
 const socketio =  require("socket.io");
-const formatMessage = require("./utils/messages");
+// package to manage auth strategies
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const User = require("./models/User.model");
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+
 
 // init express app
 const app = express();
 
-// set static folder
-app.use(express.static(path.join(__dirname, "public")));
-// set views folder
-app.set("views", __dirname + "/views");
-// set view engine as hbs
-app.set("view engine", "hbs");
+// import database config
+require("./configs/db.config");
+// import global config
+require("./configs/index.config")(app);
+// import session config
+require("./configs/session.config")(app);
 
+// import passport
+require("./configs/passport.config")(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
+// import routers
 const mainRouter = require("./routes/index");
 app.use("/", mainRouter);
+
+const authRouter = require("./routes/auth");
+app.use("/auth", authRouter);
+
+const privateRouter = require("./routes/private");
+app.use("/private", privateRouter);
 
 // init http server
 const server = http.createServer(app);
 // init client socket
 const io = socketio(server);
 
-const botName = "Chatter bot";
+const botName = "Signal bot";
 
 // run when client connects
 io.on("connection", socket => {
