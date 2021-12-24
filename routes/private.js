@@ -1,15 +1,10 @@
 const router = require("express").Router();
+const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
 
 
 
 // get join chat route
-router.get("/join-chat", (req, res, next) => {
-  // make sure the user is connected
-  if (!req.user) {
-    res.redirect("/auth/login");
-    return;
-  }
-
+router.get("/join-chat", ensureAuthenticated, (req, res, next) => {
   res.render("private/join-chat", {
     user: req.user
   });

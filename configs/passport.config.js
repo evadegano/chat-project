@@ -1,9 +1,9 @@
 // package to manage auth strategies
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("../models/User.model");
 const bcrypt = require("bcryptjs");
-
 
 
 module.exports = passport => {
@@ -32,6 +32,37 @@ module.exports = passport => {
             }
 
             done(null, user);
+          })
+          .catch(err => done(err));
+      }
+    )
+  )
+
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: process.env.GOOGLE_CALLBACK_URL || "/auth/google/callback"
+      },
+      (accessToken, refreshToken, profile, done) => {
+        console.log("Google account details: ", profile);
+
+        // search for user in database
+        User.findOne({ googleID: profile.id })
+          .then(user => {
+            // log in user if found
+            if (user) {
+              done(null, user);
+              return;
+            }
+
+            // add user to database if not found
+            User.create({ googleID: profile.id })
+              .then(newUser => {
+                done(null, newUser);
+              })
+              .catch(err => done(err));
           })
           .catch(err => done(err));
       }

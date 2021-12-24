@@ -3,12 +3,7 @@ require("dotenv").config();
 const http = require("http"); // need to access this directly to use Socket.io
 const express = require("express");
 const socketio =  require("socket.io");
-// package to manage auth strategies
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const User = require("./models/User.model");
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
+const passport = require('passport');
 
 
 // init express app

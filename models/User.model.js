@@ -5,7 +5,6 @@ const userSchema = new Schema({
   username: {
     type: String,
     trim: true,
-    required: [true, "Please enter a username"],
     unique: [true, "This username already exists"],
     match: [/[A-z]{3,21}/ , "Usernames must have three to twenty letters only"],
   },
@@ -18,7 +17,6 @@ const userSchema = new Schema({
     type: String,
     lowercase: true,
     trim: true,
-    required: [true, "Please enter your email address"],
     unique: [true, "This email address is already linked to an account"],
     match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, "Please use a valid email address."]
   },

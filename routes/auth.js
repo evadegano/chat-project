@@ -3,6 +3,7 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const User = require("../models/User.model");
 
+// package used for password hashing
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
@@ -149,33 +150,40 @@ router.post("/signup", (req, res, next) => {
 
 // get log in route
 router.get("/login", (req, res, next) => {
-  res.render("auth/login");
+  res.render("auth/login", {
+    errorMessage: req.flash("error")
+  });
 })
 
 
 // post log in route
 router.post("/login", passport.authenticate("local", {
   successRedirect: "/private/join-chat",
-  failureRedirect: "/auth/login"
+  failureRedirect: "/auth/login",
+  failureFlash: true
   })
 )
 
+// get Google route
+router.get("/google", passport.authenticate("google", {
+  scope: [
+    "https://www.googleapis.com/auth/userinfo.profile",
+    "https://www.googleapis.com/auth/userinfo.email"
+  ]
+}))
+
+// get Google callback route
+router.get("/google/callback", passport.authenticate("google", {
+  successRedirect: "/private/join-chat",
+  failureRedirect: "/auth/login"
+}))
 
 // post logout route
 router.post("/logout", (req, res, next) => {
-  // destroy user session
-  req.session.destroy((err) => {
-    if (err) {
-      return res
-        .status(400)
-        .render("private/join-chat", {
-          errorMessage: err.message
-        })
-    }
-
-    // send user back to homepage
-    res.redirect("/");
-  })
+  // terminate user session
+  req.logout();
+  // send user back to homepage
+  res.redirect("/");
 })
 
 

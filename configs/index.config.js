@@ -1,6 +1,8 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const flash = require("connect-flash");
 const path = require("path");
+
 
 module.exports = app => {
   // get access to the body property in the request
@@ -14,4 +16,7 @@ module.exports = app => {
   app.set("views", path.join(__dirname, "..", "views"));
   // set view engine as hbs
   app.set("view engine", "hbs");
+
+  // use flash messages
+  app.use(flash());
 }
