@@ -5,7 +5,7 @@ const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost/signal";
 
 // connect to database
 mongoose
-  .connect(MONGO_URI)
+  .connect(process.env.MONGODB_URI)
   .then(x => {
     console.log(`Connected to Mongo! Database name: ${x.connections[0].name}`);
   })
