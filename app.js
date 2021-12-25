@@ -2,7 +2,6 @@
 require("dotenv").config();
 const http = require("http"); // need to access this directly to use Socket.io
 const express = require("express");
-const socketio =  require("socket.io");
 const passport = require('passport');
 
 
@@ -33,7 +32,6 @@ app.use("/private", privateRouter);
 
 // init http server
 const server = http.createServer(app);
-
 
 
 module.exports = server;

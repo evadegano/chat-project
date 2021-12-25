@@ -1,3 +1,5 @@
+const socketio =  require("socket.io");
+
 // init client socket
 const io = socketio(server);
 
