@@ -2,6 +2,8 @@ const router = require("express").Router();
 const passport = require("passport");
 const mongoose = require("mongoose");
 const User = require("../models/User.model");
+// middleware
+const doesntHaveUsername = require("../middlewares/doesntHaveUsername");
 
 // package used for password hashing
 const bcrypt = require("bcryptjs");
@@ -147,6 +149,25 @@ router.post("/signup", (req, res, next) => {
     .catch(err => next(err))
 })
 
+// get complete signup page
+router.get("/complete-signup", doesntHaveUsername, (req, res, next) => {
+  res.render("auth/complete-signup", {
+    errorMessage: req.flash("error")
+  });
+})
+
+// post complete signup page
+router.post("/complete-signup", (req, res, next) => {
+  const { username } = req.body;
+
+  // update user info with a username
+  User.findByIdAndUpdate(req.session.user._id, { username }, { new: true })
+    .then((updatedUser) => {
+      req.session.user.username = updatedUser.username;
+      res.redirect("/private/join-chat");
+    })
+    .catch(err => next(err));
+})
 
 // get log in route
 router.get("/login", (req, res, next) => {

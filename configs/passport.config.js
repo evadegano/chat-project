@@ -58,7 +58,10 @@ module.exports = passport => {
             }
 
             // add user to database if not found
-            User.create({ googleID: profile.id })
+            User.create({
+              email: profile.emails.value,
+              googleID: profile.id
+            })
               .then(newUser => {
                 done(null, newUser);
               })

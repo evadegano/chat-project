@@ -1,0 +1,11 @@
+<h1>Complete your profile</h1>
+<form method="POST" action="/auth/complete-signup">
+  <label>Choose a username:</label>
+  <input type="text" name="username" placeholder="j_doe25">
+
+  <button type="submit">Save</button>
+
+  {{#if errorMessage}}
+  <div class="error-msg">{{errorMessage}}</div>
+  {{#if}}
+</form>
