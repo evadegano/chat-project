@@ -1,6 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
+const favicon = require("serve-favicon");
 const path = require("path");
 
 
@@ -16,6 +17,11 @@ module.exports = app => {
   app.set("views", path.join(__dirname, "..", "views"));
   // set view engine as hbs
   app.set("view engine", "hbs");
+
+  // set access to favicon
+  app.use(
+    favicon(path.join(__dirname, "..", "public", "images", "favicon.ico"))
+  );
 
   // use flash messages
   app.use(flash());
