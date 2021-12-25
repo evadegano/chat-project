@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 
-// store database uri
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost/signal";
-
 // connect to database
 mongoose
   .connect(process.env.MONGODB_URI)

@@ -4,7 +4,6 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 
 
-
 module.exports = app => {
   app.use(
     session({
@@ -12,7 +11,7 @@ module.exports = app => {
       resave: false,
       saveUninitialized: true,
       store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URI,
+        mongoUrl: process.env.MONGODB_URI,
       })
     })
   );
