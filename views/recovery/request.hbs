@@ -1,0 +1,15 @@
+<h1>Password recovery</h1>
+<form method="POST" action="/recovery/request">
+  <label>What is your email address?</label>
+  <input type="email" name="email" placeholder="john_doe@gmail.com" required>
+
+  <button type="submit">Send</button>
+
+  {{#if errorMessage}}
+  <div class="error-msg">{{errorMessage}}</div>
+  {{/if}}
+</form>
+
+{{#if successMessage}}
+<div class="success-msg">{{successMessage}}</div>
+{{/if}}

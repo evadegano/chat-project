@@ -27,6 +27,9 @@ app.use("/", mainRouter);
 const authRouter = require("./routes/auth");
 app.use("/auth", authRouter);
 
+const recoveryRouter = require("./routes/recovery");
+app.use("/recovery", recoveryRouter);
+
 const privateRouter = require("./routes/private");
 app.use("/private", privateRouter);
 

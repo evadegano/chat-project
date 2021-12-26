@@ -1,3 +1,6 @@
+<nav>
+  <a href="/">Home</a>
+</nav>
 <h1>Log in</h1>
 <div>
   <a href="/auth/google">Log in with Google</a>
@@ -11,9 +14,8 @@
 
   <button type="submit">Log in</button>
 
-  <a href="">I forgot my password</a>
-
   {{#if errorMessage}}
-  <div>{{errorMessage}}</div>
+  <div class="error-msg">{{errorMessage}}</div>
   {{/if}}
 </form>
+<a href="/recovery/request">I forgot my password</a>

@@ -7,18 +7,9 @@
       </form>
     </nav>
   </header>
+
   <main class="join-main">
-    <form action="chat.html">
-      <div class="form-control">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          placeholder="Enter username..."
-          required
-        />
-      </div>
+    <form method="POST" action="/private/join-chat">
       <div class="form-control">
         <label for="room">Room</label>
         <select name="room" id="room">

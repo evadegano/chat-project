@@ -10,7 +10,6 @@ const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
 
-
 // get sign up route
 router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
